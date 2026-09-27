@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using TodoServerApp.Components;
 using TodoServerApp.Components.Account;
 using TodoServerApp.Data;
+using TodoServerApp.Data.Interfaces;
+using TodoServerApp.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,8 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+builder.Services.AddScoped<IDataService, MSSQLDataService>();
+
 
 var app = builder.Build();
 
